@@ -1,0 +1,160 @@
+<div class="container">
+  <p-card>
+    <form #productForm="ngForm"
+          (ngSubmit)="onSubmit(productForm)">
+
+
+
+      <div class="ui-g ui-fluid">
+        <div class="ui-g-12 ui-md-7">
+          <div class="ui-inputgroup">
+            <span class="ui-inputgroup-addon"><i class="pi pi-info"></i></span>
+            <input type="text"
+                   pInputText
+                   placeholder="Id"
+                   size="30"
+                   #id="ngModel"
+                   name="id"
+                   [(ngModel)]="productService.selectedProduct.id"
+                   required>
+          </div>
+        </div>
+
+        <div class="ui-g-12 ui-md-7">
+          <div class="ui-inputgroup">
+            <span class="ui-inputgroup-addon"><i class="pi pi-user"></i></span>
+            <input type="text"
+                   pInputText
+                   placeholder="Nombre del producto"
+                   size="30"
+                   #name="ngModel"
+                   name="name"
+                   [(ngModel)]="productService.selectedProduct.name"
+                   required>
+          </div>
+        </div>
+        <div class="ui-g-12 ui-md-7">
+          <div class="ui-inputgroup">
+            <span class="ui-inputgroup-addon"><i class="pi pi-bars"></i></span>
+
+            <input type="text"
+                   pInputText
+                   placeholder="Caracteristicas"
+                   size="30"
+                   #features="ngModel"
+                   name="features"
+                   [(ngModel)]="productService.selectedProduct.features"
+                   required>
+          </div>
+        </div>
+        <div class="ui-g-12 ui-md-7">
+          <div class="ui-inputgroup">
+            <span class="ui-inputgroup-addon"><i class="pi pi-calendar"></i></span>
+            <p-calendar [(ngModel)]="date"
+                        [readonlyInput]="true"
+                        [locale]="es"
+                        name="date"
+                        dateFormat="dd/mm/  yy"
+                        placeholder="Fecha de lanzamiento"
+                        required></p-calendar>
+          </div>
+
+        </div>
+        <div class="ui-g-12 ui-md-7">
+          <div class="ui-inputgroup">
+            <span class="ui-inputgroup-addon"><i class="pi pi-external-link"></i></span>
+            <input type="mail"
+                   pInputText
+                   placeholder="Correo del Fabricante"
+                   size="30"
+                   #mailManufacturer="ngModel"
+                   name="mailManufacturer"
+                   [(ngModel)]="productService.selectedProduct.mailManufacturer"
+                   required>
+          </div>
+        </div>
+
+
+
+        <div class="ui-g-12 ui-md-9 ">
+          <div class="ui-inputgroup">
+            <span class="ui-inputgroup-addon"><i class="pi pi-globe"></i></span>
+
+            <p-dropdown [options]="countries"
+                        #country="ngModel"
+                        [(ngModel)]="productService.selectedProduct.country"
+                        placeholder="Seleccione un pais"
+                        optionLabel="name"
+                        name="country"
+                        [showClear]="true"
+                        required></p-dropdown>
+          </div>
+        </div>
+
+        <div class="ui-g-12 ui-md-7">
+          <div class="ui-inputgroup">
+            <span class="ui-inputgroup-addon">$</span>
+            <input currencyMask
+                   type="text"
+                   pInputText
+                   [options]="{thousands: '.',align:'left',precision:0,prefix:''}"
+                   placeholder="Precio"
+                   #price="ngModel"
+                   name="price"
+                   [(ngModel)]="productService.selectedProduct.price"
+                   required>
+            <span class="ui-inputgroup-addon">.00</span>
+          </div>
+        </div>
+
+        <div class="ui-g-12 ui-md-7">
+          <div class="ui-inputgroup">
+            <input type="number"
+                   pInputText
+                   placeholder="Unidades disponibles"
+                   #unitsAvailables="ngModel"
+                   name="unitsAvailables"
+                   [(ngModel)]="productService.selectedProduct.unitsAvailables"
+                   required>
+          </div>
+        </div>
+
+        <div class="ui-g-12 ui-md-7">
+          <div class="ui-inputgroup">
+            <input type="number"
+                   pInputText
+                   placeholder="Unidades vendidas"
+                   #soldUnits="ngModel"
+                   name="soldUnits"
+                   [(ngModel)]="productService.selectedProduct.soldUnits"
+                   required>
+          </div>
+        </div>
+
+        <div class="ui-g-12 ui-md-7">
+          <div class="ui-inputgroup">
+            <span class="ui-inputgroup-addon"><i class="pi pi-file"></i></span>
+
+            <input type="file"
+                   pInputText
+                   placeholder="Imagen"
+                   #image="ngModel"
+                   name="image"
+                   (change)="upload($event)"
+                   accept=".pgn,.jpg"
+                   [(ngModel)]="productService.selectedProduct.image"
+                   required>
+          </div>
+        </div>
+        <div class="ui-g-12 ui-md-12">
+          <button pButton
+                  type="submit"
+                  label="Agregar"
+                  class="ui-button-success"></button>
+
+        </div>
+
+      </div>
+    </form>
+  </p-card>
+</div>

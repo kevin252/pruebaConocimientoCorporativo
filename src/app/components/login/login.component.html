@@ -1,0 +1,43 @@
+<div class="container text-center">
+  <p-card>
+    <form #loginForm="ngForm"
+          (ngSubmit)="login(loginForm)">
+      <h3 class="first">
+        Login</h3>
+
+      <h3>Username</h3>
+      <div class="row">
+        <input id="float-input"
+               name="username"
+               type="email"
+               pInputText
+               [(ngModel)]="user.username"
+               placeholder="Email"
+               required>
+      </div>
+
+
+      <div class="row">
+        <h3>Password</h3>
+        <input type="password"
+               name="password"
+               pPassword
+               [(ngModel)]="user.password"
+               required />
+      </div>
+
+      <hr/>
+      <div class="row">
+        <button id="btn-login"
+                class="btn btn-success btn-xm"
+                type="submit"
+                pButton
+                label="Log In"></button>
+      </div>
+    </form>
+
+
+  </p-card>
+
+
+</div>

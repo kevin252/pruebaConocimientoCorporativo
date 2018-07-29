@@ -1,0 +1,163 @@
+<div class="container">
+  <p-card class="text-center">
+    <p-dataView #dv
+                [value]="products"
+                [paginator]="true"
+                [rows]="5"
+                paginatorPosition="both"
+                filterBy="id,name"
+                [sortField]="sortField"
+                [sortOrder]="sortOrder">
+      <p-header>
+        <div class="ui-helper-clearfix">
+          <div class="ui-g">
+            <div class="ui-g-12 ui-md-4">
+              <p-dropdown [options]="sortOptions"
+                          [(ngModel)]="sortKey"
+                          placeholder="Ordenar por"
+                          (onChange)="onSortChange($event)"
+                          [autoWidth]="false"
+                          [style]="{'min-width':'15em'}"></p-dropdown>
+            </div>
+            <div class="ui-g-6 ui-md-4 filter-container">
+              <div style="position:relative">
+                <input type="search"
+                       pInputText
+                       placeholder="Search by Id or Name"
+                       (keyup)="dv.filter($event.target.value)">
+              </div>
+            </div>
+            <div class="ui-g-6 ui-md-4"
+                 style="text-align:right">
+              <p-dataViewLayoutOptions></p-dataViewLayoutOptions>
+              <button class="btn-success"
+                      (click)="showDisplayDialogAddProduct($event)">+</button>
+
+            </div>
+          </div>
+        </div>
+      </p-header>
+      <ng-template let-product
+                   pTemplate="listItem">
+        <div class="ui-g"
+             style="padding: 2em;border-bottom: 1px solid #d9d9d9">
+
+          <div class="ui-g-12 ui-md-8 car-details">
+            <div class="ui-g">
+              <div class="ui-g-2 ui-sm-6">Id: </div>
+              <div class="ui-g-10 ui-sm-6"><b>{{product.id}}</b></div>
+
+              <div class="ui-g-2 ui-sm-6">Nombre del producto: </div>
+              <div class="ui-g-10 ui-sm-6"><b>{{product.name}}</b></div>
+
+
+              <div class="ui-g-2 ui-sm-6">Imagen: </div>
+              <div class="ui-g-10 ui-sm-6"><img src="{{product.image}}"
+                     alt=""
+                     width="100px"
+                     height="100px"></div>
+
+            </div>
+          </div>
+          <div class="ui-g-12 ui-md-1 search-icon">
+            <button pButton
+                    type="button"
+                    icon="pi pi-search"
+                    (click)="selectProduct($event, product)"></button>
+            <button pButton
+                    type="button"
+                    icon="pi pi-trash"
+                    class="btn-danger"
+                    (click)="removeProduct(product.$key)"></button>
+          </div>
+        </div>
+      </ng-template>
+      <ng-template let-product
+                   pTemplate="gridItem">
+        <div style="padding:.5em"
+             class="ui-g-12 ui-md-3">
+          <p-panel [header]="product.id"
+                   [style]="{'text-align':'center'}">
+
+            <div class="car-detail"> Nombre:{{product.name}}<br><img src="{{product.image}}"
+                   alt=""
+                   width="100px"
+                   height="100px">
+            </div>
+            <hr class="ui-widget-content"
+                style="border-top:0">
+            <button pButton
+                    type="button"
+                    icon="pi pi-search"
+                    (click)="selectProduct($event, product)"
+                    style="margin-top:0"></button>
+            <button pButton
+                    type="button"
+                    icon="pi pi-trash"
+                    class="btn-danger"
+                    (click)="removeProduct(product.$key)"></button>
+          </p-panel>
+        </div>
+      </ng-template>
+    </p-dataView>
+
+    <p-dialog header="Detalle del producto"
+              [(visible)]="displayDialog"
+              [responsive]="true"
+              showEffect="fade"
+              [modal]="true"
+              width="100%"
+              (onAfterHide)="onDialogHide()">
+      <div class="ui-g"
+           *ngIf="selectedProduct">
+
+        <div class="ui-g-4">Id: </div>
+        <div class="ui-g-8">{{selectedProduct.id}}</div>
+
+        <div class="ui-g-4">Nombre: </div>
+        <div class="ui-g-8">{{selectedProduct.name}}</div>
+
+        <div class="ui-g-4">Caracteristicas: </div>
+        <div class="ui-g-8">{{selectedProduct.features}}</div>
+
+        <div class="ui-g-4">Fecha de lanzamiento: </div>
+        <div class="ui-g-8">{{selectedProduct.date}}</div>
+
+        <div class="ui-g-4">Correo del fabricante: </div>
+        <div class="ui-g-8">{{selectedProduct.mailManufacturer}}</div>
+
+        <div class="ui-g-4">Pais de fabricacion: </div>
+        <div class="ui-g-8">{{selectedProduct.country.name}}</div>
+
+        <div class="ui-g-4">Precio: </div>
+        <div class="ui-g-8">{{selectedProduct.price}}</div>
+
+        <div class="ui-g-4">Unidades disponibles: </div>
+        <div class="ui-g-8">{{selectedProduct.unitsAvailables}}</div>
+
+        <div class="ui-g-4">Unidades Vendidas: </div>
+        <div class="ui-g-8">{{selectedProduct.soldUnits}}</div>
+
+        <div class="ui-g-4">Imagen: </div>
+        <div class="ui-g-8"><img src="{{selectedProduct.image}}"
+               alt=""
+               width="100px"
+               height="100px"></div>
+      </div>
+    </p-dialog>
+
+    <p-dialog header="Crear Producto"
+              [(visible)]="displayDialogAddProduct"
+              [responsive]="true"
+              showEffect="fade"
+              [modal]="true"
+              width="100%"
+              height="100%"
+              (onAfterHide)="onDialogHide()">
+      <div class="ui-g">
+
+        <app-add-product></app-add-product>
+      </div>
+    </p-dialog>
+  </p-card>
+</div>
