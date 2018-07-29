@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { NgForm } from '@angular/forms';
 import { Product } from './../../models/product.class';
 import { ProductService } from './../../services/product/product.service';
 import { SelectItem } from 'primeng/api';
@@ -57,7 +58,7 @@ export class ListProductsComponent implements OnInit {
 }
 
 onDialogHide() {
-    this.selectedProduct = null;
+  this.selectedProduct = null;
 }
   
   removeProduct($key:string) {

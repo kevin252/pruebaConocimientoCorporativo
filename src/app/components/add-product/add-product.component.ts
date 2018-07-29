@@ -2,7 +2,7 @@ import { ActivatedRoute, Router } from '@angular/router';
 import { Component, OnInit } from '@angular/core';
 import { Country } from './../../models/country.class';
 import { CountryService } from './../../services/country/country.service';
-import { Message, SelectItem } from 'primeng/api';
+import { Message } from 'primeng/api';
 import { NgForm } from '@angular/forms';
 import { Product } from '../../models/product.class';
 import { ProductService } from './../../services/product/product.service';
@@ -38,7 +38,7 @@ export class AddProductComponent implements OnInit {
   }
   onSubmit(productForm:NgForm) {
     if (productForm.valid) {
-      this.productService.addProduct(productForm.value,this.file,this.date,this.toastr);
+      this.productService.addProduct(productForm, this.file, this.date, this.toastr);
     } else {
       this.toastr.error("Por favor ingrese todos los datos");
     }
